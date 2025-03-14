@@ -1,9 +1,19 @@
-symbols = [i for i in "puёрog9G^lф`(ИФПJДBЖAяM@._CУ+&ЩбМESВЕ#ЬWЫmезI-п№2dLyqАwNЦ>йtjв}vkн~у=x)чсKиie,Б0О[Oa1QхzU ЁЙь3дг4шЗ|YЛ$ъжsкСZтРVН!;/о8PЯ5HаnDы7ЮГ{КcЭм*л:<b6ШXf%hщюTrТЧЪ]эRFХц"]
+sym = [i for i in "puёрog9G^lф`(ИФПJДBЖAяM@._CУ+&ЩбМESВЕ#ЬWЫmезI-п№2dLyqАwNЦ>йtjв}vkн~?у=x)чсKиie,Б0О[Oa1QхzU ЁЙь3дг4шЗ|YЛ$ъжsкСZтРVН!;/о8PЯ5HаnDы7ЮГ{КcЭм*л:<b6ШXf%hщюTrТЧЪ]эRFХц"]
 
-def crypt(text: str, key: str = "", sdvig: int = 0) -> str:ё
+def do_symbols_with_key(array: list, key: str) -> list:
+    for i in key:
+        if i not in array:
+            array.append(i)
+    return array
+
+
+def crypt(text: str, key: str = "", sdvig: int = 0) -> str:
+    symbols = do_symbols_with_key(sym.copy(), key)
+    key = key + "".join(symbols)[:10]
+    sdvig = sdvig + sum(ord(i) ** 2 for i in key)
     string = ""
     before = 0
-    for symbol in text.lower():
+    for symbol in text:
         if symbol in symbols:
             string += symbols[(symbols.index(symbol) + before + sdvig) % len(symbols)]
             try:
@@ -19,6 +29,9 @@ def crypt(text: str, key: str = "", sdvig: int = 0) -> str:ё
 
 
 def decrypt(text: str, key: str = "", sdvig: int = 0) -> str:
+    symbols = do_symbols_with_key(sym.copy(), key)
+    key = key + "".join(symbols)[:10]
+    sdvig = sdvig + sum(ord(i) ** 2 for i in key)
     string = ""
     before = 0
     for symbol in text:
@@ -33,10 +46,7 @@ def decrypt(text: str, key: str = "", sdvig: int = 0) -> str:
                 before = 25
         else:
             string += symbol
-    return string.capitalize()
+    return string
 
-print(crypt("Генератор текста — компьютерная программа, генерирующая тексты, корректные с точки зрения большинства языковых норм, но, как правило, лишённые смысла.", "костыли на корточках", 34345))
-print(decrypt("RyЛVNX8 лQ+к1CВr6—ПЗйбщЫ@XЧ&NЙ,2xg`umЕN6u +ЧЛ&Уу/nh№бМE9кУ~P>йZ~NqПК0kFйжuрИ№=[ВШRД$с3>щуЫhlnHvсaК62KEР5Б`сГЗyвЯH09pОЁicr|(к0HТя<GzbЦх1u[ncx(sв>|qGnОщ", "костыли на корточках", 34345))
-
-print(crypt("Красная машина!!!", "Красная машина!!!", 100))
-print(decrypt("2ъСgЗК жdъ1]-ДкНИ", "Красная машина!!!", 100))
+if __name__ == "__main__":
+    print(crypt(input("Напиши что нужно зашифровать: "), input("Напиши ключ шифрования (по дефолту его нет), чем больше букв тем: "), int(input("Какой сдвиг сделать?: "))))
