@@ -1,7 +1,6 @@
 symbols = [i for i in "puёрog9G^lф`(ИФПJДBЖAяM@._CУ+&ЩбМESВЕ#ЬWЫmезI-п№2dLyqАwNЦ>йtjв}vkн~у=x)чсKиie,Б0О[Oa1QхzU ЁЙь3дг4шЗ|YЛ$ъжsкСZтРVН!;/о8PЯ5HаnDы7ЮГ{КcЭм*л:<b6ШXf%hщюTrТЧЪ]эRFХц"]
 
-def crypt(text: str, key: str, lang: str = "ru", sdvig: int = 0) -> str:
-    """lang: ru, en """
+def crypt(text: str, key: str = "", sdvig: int = 0) -> str:ё
     string = ""
     before = 0
     for symbol in text.lower():
@@ -19,8 +18,7 @@ def crypt(text: str, key: str, lang: str = "ru", sdvig: int = 0) -> str:
     return string
 
 
-def decrypt(text: str, key: str, lang: str = "ru", sdvig: int = 0) -> str:
-    """lang: ru, en """
+def decrypt(text: str, key: str = "", sdvig: int = 0) -> str:
     string = ""
     before = 0
     for symbol in text:
@@ -37,5 +35,8 @@ def decrypt(text: str, key: str, lang: str = "ru", sdvig: int = 0) -> str:
             string += symbol
     return string.capitalize()
 
-print(crypt("Генератор текста — компьютерная программа, генерирующая тексты, корректные с точки зрения большинства языковых норм, но, как правило, лишённые смысла.", "костыли на корточках", "ru", 34345))
-print(decrypt("RyЛVNX8 лQ+к1CВr6—ПЗйбщЫ@XЧ&NЙ,2xg`umЕN6u +ЧЛ&Уу/nh№бМE9кУ~P>йZ~NqПК0kFйжuрИ№=[ВШRД$с3>щуЫhlnHvсaК62KEР5Б`сГЗyвЯH09pОЁicr|(к0HТя<GzbЦх1u[ncx(sв>|qGnОщ", "костыли на корточках", "ru", 34345))
+print(crypt("Генератор текста — компьютерная программа, генерирующая тексты, корректные с точки зрения большинства языковых норм, но, как правило, лишённые смысла.", "костыли на корточках", 34345))
+print(decrypt("RyЛVNX8 лQ+к1CВr6—ПЗйбщЫ@XЧ&NЙ,2xg`umЕN6u +ЧЛ&Уу/nh№бМE9кУ~P>йZ~NqПК0kFйжuрИ№=[ВШRД$с3>щуЫhlnHvсaК62KEР5Б`сГЗyвЯH09pОЁicr|(к0HТя<GzbЦх1u[ncx(sв>|qGnОщ", "костыли на корточках", 34345))
+
+print(crypt("Красная машина!!!", "Красная машина!!!", 100))
+print(decrypt("2ъСgЗК жdъ1]-ДкНИ", "Красная машина!!!", 100))
